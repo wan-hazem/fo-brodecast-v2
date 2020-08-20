@@ -34,20 +34,7 @@ const {prefix, mod, devs} = require('./config')
 ///////
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-   var ms = 10000;
-    var setGame = [`${prefix}help`, `${prefix}report للتبليغ على نصاب يبيع البوت`, `${prefix}contact للتواصل مع مطور البوت`, `${prefix}inv لاضافه البوت الى سيرفررك`, `${prefix}buy احصل على نسخت بريميوم`];
-    var i = -1;
-    var j = 0;
-    setInterval(function() {
-        if (i == -1) {
-            j = 1;
-        }
-        if (i == (setGame.length) - 1) {
-            j = -1;
-        }
-        i = i + j;
-        client.user.setGame(setGame[i]);
-    }, ms);
+  client.user.setActivity(`${prefix}help`)
 });
 ///////
 
