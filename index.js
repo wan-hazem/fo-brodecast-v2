@@ -72,8 +72,9 @@ var help = new Discord.RichEmbed()
 
  ◊ ${prefix}buy → لشراء نسخه بريميوم من البوت
 **`)
-        message.author.sendEmbed(help)
-        
+        message.author.sendEmbed(help).catch(error => {
+      message.channel.send("لا يمكنني ارسال الاوامرفي الخاص");
+        })
              }
 });
 
@@ -117,7 +118,9 @@ var help = new Discord.RichEmbed()
 
  ◊ ${prefix}setprefix → قريبا
 **`)
- message.author.sendEmbed(help)
+ message.author.sendEmbed(help).catch(error => {
+      message.channel.send("لا يمكنني ارسال الاوامرفي الخاص");
+        })
         
              }
 });
