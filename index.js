@@ -80,10 +80,10 @@ var help = new Discord.RichEmbed()
 
 ////owner
 client.on('message', message => {
-    if (message.author.bot) return;
      if (message.content === prefix + "help") {
-           if(!mod.includes(message.author.id)) 
-               if (message.channel.guild) return;
+         if (!message.channel.guild) return;
+         if (message.author.bot) return;
+         if(!mod.includes(message.author.id)) 
                     message.channel.send('**تم ارسال الاومر في الخاص**')
 var help = new Discord.RichEmbed()
             .setColor(0xd3d0c4)
@@ -123,7 +123,7 @@ var help = new Discord.RichEmbed()
 });
 
 
-
+///all member
 client.on("message", message => {
             if (message.content.startsWith(prefix + "bc")) {
               if(!message.channel.guild) return;
@@ -144,7 +144,7 @@ client.on("message", message => {
 });
 
 
-
+////online member
 client.on("message", message => {
             if (message.content.startsWith(prefix + "obc")) {
               if(!message.channel.guild) return;
@@ -163,7 +163,7 @@ client.on("message", message => {
  message.delete(); 
 };     
 });
-
+////ping
 client.on('message', message => {
 if (message.content.startsWith(prefix + "ping")) {
 if(!message.channel.guild) return;
@@ -179,6 +179,7 @@ message.channel.send({embed:embed});
 }
 });
 
+////bot
 client.on('message', message => { 
     if (message.content.startsWith(prefix + "bot")) { 
     if (!message.channel.guild) return;
@@ -207,7 +208,7 @@ client.on('message', message => {
 }); 
 
 
-
+////role all member
 client.on('message' , message => {
       if(message.content.startsWith(prefix + "rbc")) {
       if(message.author.bot) return;
@@ -236,12 +237,12 @@ client.on('message' , message => {
             })
             message.channel.send(`لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عضو | ☑`)
         }
-    });
+});
 	
 	
 	
-	
-    client.on('message', message => {
+///embed all member
+client.on('message', message => {
               if(!message.channel.guild) return;
     if(message.content.startsWith(prefix + 'ebc')) {
       let args111 = message.content
@@ -287,8 +288,9 @@ client.on('message' , message => {
     })
     })
     }
-    });
+});
 
+/////contact owner bot
 client.on('message', message => {
     if (message.content.startsWith(prefix + "contact")) {
           if (message.author.bot) return;
@@ -326,6 +328,7 @@ client.on('guildCreate', guild => {
  https://discord.gg/jyKqshn `)
 });
 
+/////report
 client.on('message', function(message) {
     if(message.content.startsWith(prefix + "report")) {
       if (message.author.bot) return;
@@ -357,17 +360,17 @@ let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
 let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
 reaction1.on("collect", r => {
          client.users.get(`${devs}`).send(Rembed)
-    message.reply("**# - Done! 🎇**");
+    message.reply("**تم الارسال بنجاح 🎇**");
 })
 reaction2.on("collect", r => {
-    message.reply("**# - Canceled!**");
+    message.reply("**تم الغاء العمليه بنجاح!**");
 })
 })
 }
 });
 
 
-
+////setname
 client.on("message", message => {
       if(message.content.startsWith(prefix + "setname")) {
         if (message.author.bot) return;
@@ -384,27 +387,26 @@ client.on("message", message => {
             .join(" ");
         
         client.user.setUsername(www);
-        message.channel.send(`تم تغير اسم البوت الى**${www}**`);
+        message.channel.send(`تم تغير اسم البوت الى **${www}**`);
     } 
     });
 
 
-client.on("message", msg => {
-    if(msg.content.startsWith(prefix + "setavatar")) {
-      if (message.author.bot) return;
-      if (!msg.channel.guild) return;
-        if(!mod.includes(msg.author.id)) return msg.channel.send("**ليس لديك الصلاحيه لتغير صورة البوت**")
-
-        let arg21 = msg.attachments.first().url
+//////set avatar
+client.on("message", message => {
+     if(message.content.startsWith(prefix + "setavatar")) {
+           if (message.author.bot) return;
+  if (!message.channel.guild) return;
+        let args12 = message.content
             .split(" ")
             .slice(1)
             .join(" ");
-        if (!arg21)return msg.channel.send('**يرجى ارسال الصوره مع الرساله لتغير صورة البوت**');
-        var img = msg.attachments.first().url;
-        client.user.setAvatar(img);
-        msg.channel.send(`تم تغير صوره البوت بنجاح`)
+        if (!message.author.id === mod) return;
+        client.user.setAvatar(args12).catch(err => message.reply("الرجاء ارسال رابط صالح للاستعمال"));
+        message.channel.send(`تم تغير صورت البوت ${args12}`);
     }
 });
+
 client.on('message', message => {
   if (message.content === prefix + 'buy') {
     if (message.author.bot) return;
@@ -413,9 +415,5 @@ client.on('message', message => {
     https://discord.gg/jyKqshn `);
   }
 });
-
-
-
-
 
 client.login(process.env.token);
