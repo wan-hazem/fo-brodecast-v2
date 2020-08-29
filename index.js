@@ -129,7 +129,7 @@ var help = new Discord.RichEmbed()
 ///all member
 client.on("message", message => {
             if (message.content.startsWith(prefix + "bc")) {
-              if(!message.channel.guild) return;
+              if(!message.channel.guild)return;
               let args22 = message.content
             .split(" ")
             .slice(1)
